@@ -38,6 +38,7 @@ public class ExplicitWaitTest {
         driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(1));
 
         driver.navigate().to(new URL("https://spree.shiftvision.com/"));
+
     }
 
     @Test
