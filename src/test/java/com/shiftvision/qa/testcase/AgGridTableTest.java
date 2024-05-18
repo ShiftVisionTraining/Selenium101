@@ -106,12 +106,18 @@ public class AgGridTableTest {
         act.doubleClick(cell1).perform();
         delayFor(3000);
 
+        //div.ag-popup .ag-virtual-list-viewport .ag-virtual-list-container div[role=option]
+        WebElement listbox = driver.findElement(By.cssSelector("div.ag-popup .ag-virtual-list-container[role=listbox]"));
+        WebElement listboxItem = listbox.findElement(By.xpath("./div[@role='option']//span[text()='French']"));
+        listboxItem.click();
 
-        //WebElement listbox = cell1.findElement(By.xpath(".//div[@role='listbox']"));
-        //js.highlight(listbox);
-//        List<WebElement> listboxItems = listbox.findElements(By.tagName("span"));
+       // List<WebElement> listboxItems = listbox.findElements(By.cssSelector("div[role=option]"));
 //        for(WebElement item : listboxItems){
-//            System.out.println(item.getText());
+//            String text = item.getText();
+//            System.out.println(text);
+//            if(text.contentEquals("French")){
+//                item.click();
+//            }
 //        }
         //div[@id='myGrid']/div/div[@role='presentation']/div[6]/div[@role='presentation']/div[@role='listbox']/div[2]//span[.='Spanish']
         //js.highlight(cell1);
@@ -120,6 +126,96 @@ public class AgGridTableTest {
 
         //div[role='listbox'] > div:nth-of-type(10)  span
         delayFor(3000);
+    }
+
+    @Test
+    public void test4(){
+        delayFor(3000);
+
+        WebElement tableBody = driver.findElement(By.cssSelector("div#myGrid div.ag-body"));
+        List<WebElement> rows = tableBody.findElements(By.cssSelector("div[role='row']"));
+
+        List<WebElement> cells = rows.get(0).findElements(By.cssSelector("div[role='gridcell']"));
+
+        WebElement cell1 = cells.get(1);
+        Actions act = new Actions(driver);
+        act.doubleClick(cell1).perform();
+        delayFor(3000);
+
+        //div.ag-popup .ag-virtual-list-viewport .ag-virtual-list-container div[role=option]
+        WebElement listbox = driver.findElement(By.cssSelector("div.ag-popup .ag-virtual-list-container[role=listbox]"));
+        delayFor(1000);
+        List<WebElement> listboxItems = listbox.findElements(By.cssSelector("div[role=option] span"));
+        for(WebElement item : listboxItems){
+            String text = item.getText();
+            //System.out.println(text);
+            if(text.contentEquals("French")){
+                item.click();
+                break;
+            }
+        }
+        delayFor(3000);
+    }
+
+    @Test
+    public void test5(){
+        delayFor(3000);
+
+        WebElement tableBody = driver.findElement(By.cssSelector("div#myGrid div.ag-body"));
+        List<WebElement> rows = tableBody.findElements(By.cssSelector("div[role='row']"));
+
+        List<WebElement> cells = rows.get(0).findElements(By.cssSelector("div[role='gridcell']"));
+
+        WebElement cell1 = cells.get(1);
+        Actions act = new Actions(driver);
+        act.doubleClick(cell1).perform();
+        delayFor(2000);
+
+        selectAgGridListItem("French");
+
+        WebElement cell2 = cells.get(2);
+        Actions act2 = new Actions(driver);
+        act2.doubleClick(cell2).perform();
+        delayFor(2000);
+
+        selectAgGridListItem("Italy");
+
+        WebElement cell3 = cells.get(3);
+        selectAgGridListItem(cell3,"Bul");
+
+        delayFor(3000);
+    }
+
+    public void selectAgGridListItem(String itemText){
+        WebElement listbox = driver.findElement(By.cssSelector("div.ag-popup .ag-virtual-list-container[role=listbox]"));
+        delayFor(1000);
+        List<WebElement> listboxItems = listbox.findElements(By.cssSelector("div[role=option] span"));
+        for(WebElement item : listboxItems){
+            String text = item.getText();
+            //System.out.println(text);
+            if(text.contentEquals(itemText)){
+                item.click();
+                break;
+            }
+        }
+    }
+
+    public void selectAgGridListItem(WebElement cell, String itemText){
+        Actions act = new Actions(driver);
+        act.doubleClick(cell).perform();
+        delayFor(2000);
+
+        WebElement listbox = driver.findElement(By.cssSelector("div.ag-popup .ag-virtual-list-container[role=listbox]"));
+        delayFor(1000);
+        List<WebElement> listboxItems = listbox.findElements(By.cssSelector("div[role=option] span"));
+        for(WebElement item : listboxItems){
+            String text = item.getText();
+            //System.out.println(text);
+            if(text.contentEquals(itemText)){
+                item.click();
+                break;
+            }
+        }
     }
 
     public void delayFor(int timeInMili){
