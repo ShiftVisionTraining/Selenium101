@@ -14,8 +14,8 @@ public class HomePage {
     @FindBy(css = ".alert.alert-success")
     private WebElement successAlert;
 
-    public HomePage(WebDriver driver){
-        this.driver = driver;
+    public HomePage(){
+        this.driver = DriverFactory.getInstance().getDriver();;
         PageFactory.initElements(driver,this);
     }
 

@@ -1,5 +1,6 @@
 package com.shiftvision.qa.testcase;
 
+import com.shiftvision.spree.framework.pom.DriverFactory;
 import com.shiftvision.spree.framework.pom.HomePage;
 import com.shiftvision.spree.framework.pom.LoginPage;
 import org.junit.jupiter.api.AfterEach;
@@ -16,13 +17,13 @@ public class SpreePageObjectModelTest1 {
     @BeforeEach
     public void setUp(){
         System.out.println("BeforeEach...");
-        String driverFile = System.getProperty("user.dir") + "/src/main/resources/drivers/chrome/win/chromedriver.exe";
-        System.setProperty("webdriver.chrome.driver",driverFile);
-        driver = new ChromeDriver();
+//        String driverFile = System.getProperty("user.dir") + "/src/main/resources/drivers/chrome/win/chromedriver.exe";
+//        System.setProperty("webdriver.chrome.driver",driverFile);
+//        driver = new ChromeDriver();
         driver.navigate().to("https://spree.shiftvision.com/");
-
-        homePage = new HomePage(driver);
-        loginPage = new LoginPage(driver);
+        this.driver = DriverFactory.getInstance().getDriver();
+        homePage = new HomePage();
+        loginPage = new LoginPage();
     }
 
     @Test

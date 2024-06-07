@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
     private WebDriver driver;
 
+    //Model Section
     @FindBy(id = "spree_user_email")
     private  WebElement emailTextbox;
     @FindBy(id = "spree_user_password")
@@ -21,11 +22,12 @@ public class LoginPage {
     private WebElement errorAlert;
 
 
-    public LoginPage(WebDriver driver){
-        this.driver = driver;
+    public LoginPage(){
+        this.driver = DriverFactory.getInstance().getDriver();;
         PageFactory.initElements(driver,this);
     }
 
+    //Controller Section
     public void login(String email, String password) {
         emailTextbox.sendKeys(email);
         passwordTextbox.sendKeys(password);
