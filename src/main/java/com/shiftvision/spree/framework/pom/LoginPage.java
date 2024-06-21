@@ -38,4 +38,9 @@ public class LoginPage {
         String errorText = errorAlert.getText();
         Assertions.assertEquals(expectedMsg, errorText);
     }
+
+    public void verifyEmailValidationMessage(String expectedMsg){
+            String actualMsg = emailTextbox.getAttribute("validationMessage");
+            Assertions.assertEquals(expectedMsg, actualMsg);
+    }
 }
