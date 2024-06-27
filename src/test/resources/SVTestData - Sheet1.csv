@@ -1,0 +1,7 @@
+ValidationType,Email,Password,Message
+Success,test@shiftvision.com,shift123,Logged in successfully
+Invalid,invalid@shiftvision.com,shift123,Invalid email or password.
+Invalid,test@shiftvision.com,invalid,Invalid email or password.
+Validation,@shiftvision.com,shift123,Please enter a part followed by '@'. '@shiftvision.com' is incomplete.
+Validation,invalid,shift123,Please include an '@' in the email address. 'invalid' is missing an '@'.
+Validation,test,shift123,Please include an '@' in the email address. 'test' is missing an '@'.
