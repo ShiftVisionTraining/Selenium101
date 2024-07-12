@@ -274,9 +274,12 @@ public class ExcelReader {
             Sheet sheet = workbook.getSheetAt(sheetIndex);
             if (sheet != null) {
                 if (rowToSkip >= 0) {
+                    //int totalRows = (sheet.getPhysicalNumberOfRows() + 1);
                     int totalRows = (sheet.getLastRowNum() + 1);
                     int rows = totalRows - rowToSkip;
-                    int cols = sheet.getRow(sheet.getLastRowNum()).getPhysicalNumberOfCells();
+                    System.out.println("Excel has Total rows: " + rows);
+                    int cols = sheet.getRow(sheet.getTopRow()).getPhysicalNumberOfCells();
+                    System.out.println("Excel has Total columns: " + cols);
                     if(rows > 0 && cols > 0) {
                         data = new String[rows][cols];
                         for (int i = rowToSkip; i < totalRows; i++) {

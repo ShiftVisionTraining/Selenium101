@@ -10,10 +10,12 @@ public class KeywordFactory {
     private static KeywordFactory instance = null;
     private DriverFactory driverFactory = null;
     private ActionFactory actionFactory = null;
+    private ObjectRepoFactory objectFactory = null;
 
     private KeywordFactory(){
         driverFactory = DriverFactory.getInstance();
         actionFactory = ActionFactory.getInstance();
+        objectFactory = ObjectRepoFactory.getInstance();
     }
     public static KeywordFactory getInstance(){
         if(instance == null){

@@ -16,6 +16,9 @@ public class TestStep {
     private String description;
     @Column(name="Keyword")
     private String keyword;
+
+    @Column(name="Page")
+    private String page;
     @Column(name="Locator")
     private String locator;
     @Column(name="Data")
@@ -45,6 +48,14 @@ public class TestStep {
         this.keyword = keyword;
     }
 
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
+    }
+
     public String getLocator() {
         return locator;
     }
@@ -63,15 +74,20 @@ public class TestStep {
 
     public By getLocatorBy(){
         By by = null;
-        if(locator != null && locator.length() > 0 && locator.contains(":") ) {
-            String byWithLocator = locator;
-            String parts[] = byWithLocator.split(":");
-            if (parts != null && parts.length > 0) {
-                String locatorBy = parts[0];
-                String locatorValue = parts[1];
-                by = getBy(locatorBy, locatorValue);
-            } else {
-                throw new RuntimeException("There is no locator for the by object ");
+
+        if(page != null && page.length() > 0){
+            by = ObjectRepoFactory.getInstance().getPageLocatorBy(page, locator);
+        } else {
+            if (locator != null && locator.length() > 0 && locator.contains(":")) {
+                String byWithLocator = locator;
+                String parts[] = byWithLocator.split(":");
+                if (parts != null && parts.length > 0) {
+                    String locatorBy = parts[0];
+                    String locatorValue = parts[1];
+                    by = getBy(locatorBy, locatorValue);
+                } else {
+                    throw new RuntimeException("There is no locator for the by object ");
+                }
             }
         }
         return  by;
@@ -83,10 +99,22 @@ public class TestStep {
                 "step=" + step +
                 ", description='" + description + '\'' +
                 ", keyword='" + keyword + '\'' +
+                ", page='" + page + '\'' +
                 ", locator='" + locator + '\'' +
                 ", data='" + data + '\'' +
                 '}';
     }
+
+    //    @Override
+//    public String toString() {
+//        return "TestStep{" +
+//                "step=" + step +
+//                ", description='" + description + '\'' +
+//                ", keyword='" + keyword + '\'' +
+//                ", locator='" + locator + '\'' +
+//                ", data='" + data + '\'' +
+//                '}';
+//    }
 
     private By getBy(String locatorBy, String locator) {
         By by = null;
